@@ -14,12 +14,30 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>parent</module>
         <module>parent-boot-docker-app</module>
         <module>api-gateway</module>
         <module>installation</module>
     </modules>
+    <properties>
+        <!-- Build properties -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <use-docker-config-file>false</use-docker-config-file>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <!-- Dependency Verisons -->
+        <spring-boot.version>1.4.2.RELEASE</spring-boot.version>
+        <spring.cloud.version>1.1.0.RELEASE</spring.cloud.version>
+        <spring.version>4.0.4.RELEASE</spring.version>
+
+        <!-- Plugin Versions -->
+        <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
+        <docker-maven-plugin.version>0.4.13</docker-maven-plugin.version>
+        <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+
+        <guava.version>18.0</guava.version>
+    </properties>
     <!-- Unless the docker.registry value is set docker images will not be tagged or pushed. -->
     <profiles>
         <profile>
@@ -35,5 +53,36 @@
             </properties>
         </profile>
     </profiles>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-config</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Common testing dependencies, since we should all be testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>
