@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.dell.cpsd</groupId>
+        <artifactId>root-parent</artifactId>
+        <version>0.1</version>
+    </parent>
+
+
+    <groupId>com.dell.cpsd.api-gateway</groupId>
+    <artifactId>api-gateway-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>parent</module>
+        <module>parent-boot-docker-app</module>
+        <module>api-gateway</module>
+        <module>installation</module>
+    </modules>
+
+    <!-- Unless the docker.registry value is set docker images will not be tagged or pushed. -->
+    <profiles>
+        <profile>
+            <id>docker-push-toggle</id>
+            <activation>
+                <property>
+                    <name>!docker.registry</name>
+                </property>
+            </activation>
+            <properties>
+                <skipDockerTag>true</skipDockerTag>
+                <skipDockerPush>true</skipDockerPush>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
