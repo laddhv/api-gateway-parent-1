@@ -18,6 +18,6 @@ fi
 systemctl enable api-gateway-services
 systemctl start api-gateway-services
 
-echo "Dell Inc. ESS install has completed successfully."
+echo "Dell Inc. API Gateway install has completed successfully."
 
 exit $RETVAL
