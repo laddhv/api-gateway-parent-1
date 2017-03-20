@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Copyright © 2016 Dell Inc. or its subsidiaries. All Rights Reserved.
-# VCE Confidential/Proprietary Information
+# Dell Confidential/Proprietary Information
 #
 
 # script to create RPM file which contains anything needed for installing and

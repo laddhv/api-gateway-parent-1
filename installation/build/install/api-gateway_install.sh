@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Copyright © 2016 Dell Inc. or its subsidiaries. All Rights Reserved.
-# VCE Confidential/Proprietary Information
+# Dell Confidential/Proprietary Information
 #
 
 RETVAL=0
