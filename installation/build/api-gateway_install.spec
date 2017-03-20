@@ -116,8 +116,8 @@ exit 0
 ##############################################################################
 %files
 
-attr(0754,apigw,dell) /opt/dell/api-gateway/
-attr(0754,apigw,dell) /opt/dell/api-gateway/install/
+%attr(0754,apigw,dell) /opt/dell/api-gateway/
+%attr(0754,apigw,dell) /opt/dell/api-gateway/install/
 
-config(noreplace) /usr/lib/systemd/system/api-gateway-services.service
-config(noreplace) /opt/dell/api-gateway/install/docker-compose.yml
+%config(noreplace) /usr/lib/systemd/system/api-gateway-services.service
+%config(noreplace) /opt/dell/api-gateway/install/docker-compose.yml
