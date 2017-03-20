@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  amqp:
+    image: rabbitmq:3-management
+    hostname: rabbit-1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE
+
+  gateway:
+    image: cpsd-ess-api-gateway
+    ports:
+      - "10000:10000"
+    command: --spring.cloud.consul.host=${HOSTNAME}
