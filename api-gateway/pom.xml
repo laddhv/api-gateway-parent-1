@@ -14,7 +14,7 @@
     <artifactId>api-gateway</artifactId>
 
     <properties>
-        <dockerImage.service>${project.artifactId}</dockerImage.tag>
+        <dockerImage.service>${project.artifactId}</dockerImage.service>
     </properties>
 
     <dependencies>
