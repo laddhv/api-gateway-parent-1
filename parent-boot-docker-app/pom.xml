@@ -25,7 +25,7 @@
         <!-- Specifies the organization name to use for our Docker images. It's important that this not contain
              dots to avoid triggering registry hostname logic -->
         <dockerImage.org>cpsd</dockerImage.org>
-        <dockerImage.tag>latest</dockerImage.tag>
+        <dockerImage.tag>${project.version}</dockerImage.tag>
     </properties>
 
     <dependencyManagement>
@@ -106,40 +106,6 @@
                     -->
                     <groupId>com.spotify</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
-                    <version>${docker-maven-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>build-image</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>build</goal>
-                            </goals>
-                            <configuration>
-                                <imageName>${dockerImage.org}-${project.artifactId}:${dockerImage.tag}</imageName>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>tag-image</id>
-                            <phase>deploy</phase>
-                            <goals>
-                                <goal>tag</goal>
-                            </goals>
-                            <configuration>
-                                <image>${dockerImage.org}-${project.artifactId}:${dockerImage.tag}</image>
-                                <newName>${docker.registry}/${dockerImage.org}-${project.artifactId}:${dockerImage.tag}</newName>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>push-image</id>
-                            <phase>deploy</phase>
-                            <goals>
-                                <goal>push</goal>
-                            </goals>
-                            <configuration>
-                                <imageName>${docker.registry}/${dockerImage.org}-${project.artifactId}:${dockerImage.tag}</imageName>
-                            </configuration>
-                        </execution>
-                    </executions>
                     <configuration>
                         <baseImage>openjdk:8</baseImage>
                         <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
