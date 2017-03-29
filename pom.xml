@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.dell.cpsd</groupId>
         <artifactId>root-parent</artifactId>
-        <version>0.1</version>
+        <version>0.2</version>
     </parent>
 
 
@@ -33,26 +33,10 @@
 
         <!-- Plugin Versions -->
         <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
-        <docker-maven-plugin.version>0.4.13</docker-maven-plugin.version>
         <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
 
         <guava.version>18.0</guava.version>
     </properties>
-    <!-- Unless the docker.registry value is set docker images will not be tagged or pushed. -->
-    <profiles>
-        <profile>
-            <id>docker-push-toggle</id>
-            <activation>
-                <property>
-                    <name>!docker.registry</name>
-                </property>
-            </activation>
-            <properties>
-                <skipDockerTag>true</skipDockerTag>
-                <skipDockerPush>true</skipDockerPush>
-            </properties>
-        </profile>
-    </profiles>
     <dependencyManagement>
         <dependencies>
             <dependency>
