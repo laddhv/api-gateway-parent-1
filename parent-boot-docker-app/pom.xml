@@ -70,40 +70,6 @@
                 </plugin>
 
                 <plugin>
-                    <!--
-                    The Docker plugin is configured generically here in the parent, but
-                    application POMs still need to reference the plugin.
-
-                    More docs about the plugin are available at:
-                    https://github.com/spotify/docker-maven-plugin
-
-                    The Spring Boot plugin also needs to be referenced and it is REQUIRED
-                    that it be referenced BEFORE the docker plugin. That way the Boot-ified
-                    jar gets built into the Docker image.
-
-                    <build>
-                        <plugins>
-                            <plugin>
-                                <groupId>org.springframework.boot</groupId>
-                                <artifactId>spring-boot-maven-plugin</artifactId>
-                            </plugin>
-                            <plugin>
-                                <groupId>com.spotify</groupId>
-                                <artifactId>docker-maven-plugin</artifactId>
-                            </plugin>
-                        </plugins>
-                    </build>
-
-                    You can augment configuration specific to your application's Docker image
-                    by including a <configuration> section, such as
-
-                    <configuration>
-                        <env>
-                            <SPRING_CONFIG_URI>http://config-server:8888/config-server/</SPRING_CONFIG_URI>
-                        </env>
-                    </configuration>
-
-                    -->
                     <groupId>com.spotify</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
                     <configuration>
