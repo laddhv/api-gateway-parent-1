@@ -53,7 +53,7 @@ pipeline {
                 }
             }
         }
-        stage('NexB Scan') {
+         stage('NexB Scan') {
             steps {
                 dir('/opt') {
                     checkout([$class: 'GitSCM', 
@@ -63,14 +63,18 @@ pipeline {
                               submoduleCfg: [], 
                               userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
                 }
-                dir('nexb-output'){
-                    sh "sh /opt/nexB/scancode --help"
-                    sh "sh /opt/nexB/scancode --format html-app ${WORKSPACE} scancode_result.html"
-                    sh "sh /opt/nexB/scancode --format html ${WORKSPACE} minimal.html"
-                }
-                archiveArtifacts '**/nexb-output/**'
+				
+				sh "mkdir -p /opt/nexB/output/"
+        //      sh 'sh /opt/nexB/scancode --help'
+		        sh "sh /opt/nexB/scancode --help"
+                sh "sh /opt/nexB/scancode --format html ${WORKSPACE} /opt/nexB/output/scancode_result.html"
+		        sh "sh /opt/nexB/scancode --format html-app ${WORKSPACE} /opt/nexB/output/minimal.html"
+	       
+	            sh "mv /opt/nexB/output/ ${WORKSPACE}/"
+	       	    archiveArtifacts '**/output/**'
             }
         }
+        
         stage('Third Party Audit') {
             steps {
                 sh '''
