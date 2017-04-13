@@ -88,7 +88,7 @@ pipeline {
         stage('Github Release') {
             when {
                 expression {
-                    return env.BRANCH_NAME ==~ /master|release\/.*/
+                    return env.BRANCH_NAME ==~ /release\/.*/
                 }
             }
             steps {
