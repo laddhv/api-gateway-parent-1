@@ -22,7 +22,6 @@ Then run the following command:- mvn clean install
 The output of the build for this repository is a docker container. See /parent-boot-docker-app sub-folder.
 ## Testing
 Unit tests are run as part of the mvn packaging 
-The project is auto built in Jenkins with automation tests.
 ## Contributing
 
 The Symphony project is a collection of services and libraries housed at https://github.com/dellemc-symphony.
