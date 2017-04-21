@@ -1,5 +1,6 @@
 #
-# Copyright © 2016 Dell Inc. or its subsidiaries. All Rights Reserved.
+# Copyright &copy; 2017 Dell Inc. or its subsidiaries. All Rights Reserved.
+# Dell EMC Confidential/Proprietary Information
 #
 Summary: Dell Inc. API Gateway Installer
 Name: api-gateway_install
