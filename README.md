@@ -1,4 +1,4 @@
-[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://img.shields.io/badge/License-GPL%20v2-blue.svg)
+[![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)](https://opensource.org/licenses/EPL-1.0)
 # api-gateway-parent
 ## Description
 This repository provides an API gateway to project Symphony. This service is automatically started on the Symphony OVA. 
