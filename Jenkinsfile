@@ -1,8 +1,3 @@
-import com.dell.cpsd.SCM.Utils
-
-def utils = new com.dell.cpsd.SCM.Utils()
-def repoName = utils.getRepoName()    
-
 pipeline {    
     agent {
         node{
@@ -64,18 +59,18 @@ pipeline {
                     checkout([$class: 'GitSCM', 
                               branches: [[name: '*/master']], 
                               doGenerateSubmoduleConfigurations: false, 
-			      extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '${repoName}-nexB']], 
+			      extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '${JOB_NAME}-nexB']], 
                               submoduleCfg: [], 
                               userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
                 }
 				
-		    sh "mkdir -p /opt/${repoName}-nexB/nexb-output/"
+		    sh "mkdir -p /opt/${JOB_NAME}-nexB/nexb-output/"
        
-		    sh "sh /opt/${repoName}-nexB/scancode --help"
-                    sh "sh /opt/${repoName}-nexB/scancode --format html ${WORKSPACE} /opt/${repoName}-nexB/nexb-output/api-gateway-parent.html"
-		    sh "sh /opt/${repoName}-nexB/scancode --format html-app ${WORKSPACE} /opt/${repoName}-nexB/nexb-output/api-gateway-parent-grap.html"
+		    sh "sh /opt/${JOB_NAME}-nexB/scancode --help"
+                    sh "sh /opt/${JOB_NAME}-nexB/scancode --format html ${WORKSPACE} /opt/${JOB_NAME}-nexB/nexb-output/api-gateway-parent.html"
+		    sh "sh /opt/${JOB_NAME}-nexB/scancode --format html-app ${WORKSPACE} /opt/${JOB_NAME}-nexB/nexb-output/api-gateway-parent-grap.html"
 	       
-	            sh "mv /opt/${repoName}-nexB/nexb-output/ ${WORKSPACE}/"
+	            sh "mv /opt/${JOB_NAME}-nexB/nexb-output/ ${WORKSPACE}/"
 	       	    archiveArtifacts '**/nexb-output/**'
             }
         }
