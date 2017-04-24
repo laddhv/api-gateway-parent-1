@@ -1,7 +1,8 @@
 #!/bin/bash
 #
-# Copyright © 2016 Dell Inc. or its subsidiaries. All Rights Reserved.
-# Dell Confidential/Proprietary Information
+# Copyright &copy; 2017 Dell Inc. or its subsidiaries. All Rights Reserved.
+# Dell EMC Confidential/Proprietary Information
+#
 #
 
 RETVAL=0
