@@ -59,18 +59,18 @@ pipeline {
                     checkout([$class: 'GitSCM', 
                               branches: [[name: '*/master']], 
                               doGenerateSubmoduleConfigurations: false, 
-			      extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '${JOB_NAME}-nexB']], 
+			      extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'nexB']], 
                               submoduleCfg: [], 
                               userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
                 }
 				
-		    sh "mkdir -p /opt/${JOB_NAME}-nexB/nexb-output/"
+		    sh "mkdir -p /opt/nexB/${JOB_NAME}/nexb-output/"
        
-		    sh "sh /opt/${JOB_NAME}-nexB/scancode --help"
-                    sh "sh /opt/${JOB_NAME}-nexB/scancode --format html ${WORKSPACE} /opt/${JOB_NAME}-nexB/nexb-output/api-gateway-parent.html"
-		    sh "sh /opt/${JOB_NAME}-nexB/scancode --format html-app ${WORKSPACE} /opt/${JOB_NAME}-nexB/nexb-output/api-gateway-parent-grap.html"
+		    sh "sh /opt/nexB/scancode --help"
+                    sh "sh /opt/nexB/scancode --format html ${WORKSPACE} /opt/nexB/${JOB_NAME}/nexb-output/api-gateway-parent.html"
+		    sh "sh /opt/nexB/scancode --format html-app ${WORKSPACE} /opt/nexB/${JOB_NAME}/nexb-output/api-gateway-parent-grap.html"
 	       
-	            sh "mv /opt/${JOB_NAME}-nexB/nexb-output/ ${WORKSPACE}/"
+	            sh "mv /opt/nexB/${JOB_NAME}/nexb-output/ ${WORKSPACE}/"
 	       	    archiveArtifacts '**/nexb-output/**'
             }
         }
