@@ -3,7 +3,7 @@
 # Dell EMC Confidential/Proprietary Information
 #
 Summary: Dell Inc. API Gateway Installer
-Name: api-gateway_install
+Name: cpsd-api-gateway-service
 Version: %_version
 Release: %_revision
 License: Commercial
