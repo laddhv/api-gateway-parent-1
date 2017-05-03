@@ -6,27 +6,45 @@
     <parent>
         <groupId>com.dell.cpsd</groupId>
         <artifactId>root-parent</artifactId>
-        <version>0.2</version>
+        <version>0.2.4</version>
     </parent>
-
 
     <groupId>com.dell.cpsd.api-gateway</groupId>
     <artifactId>api-gateway-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
+
+    <licenses>
+        <license>
+            <name>Eclipse Public License - v 1.0</name>
+            <url>http://www.eclipse.org/legal/epl-v10.html</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Frank Rouse</name>
+            <email>frank.rouse@dell.com</email>
+            <organization>com.dell.cpsd</organization>
+            <organizationUrl>https://github.com/rousef42</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/dellemc-symphony/api-gateway-parent.git</connection>
+        <developerConnection>scm:git:git://github.com/dellemc-symphony/api-gateway-parent.git</developerConnection>
+        <url>https://github.com/dellemc-symphony/api-gateway-parent/tree/master</url>
+    </scm>
 
     <modules>
         <module>parent-boot-docker-app</module>
         <module>api-gateway</module>
         <module>installation</module>
     </modules>
+
     <properties>
         <!-- Build properties -->
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
         <use-docker-config-file>false</use-docker-config-file>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Dependency Verisons -->
         <spring-boot.version>1.4.2.RELEASE</spring-boot.version>
@@ -39,6 +57,7 @@
 
         <guava.version>18.0</guava.version>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -70,5 +89,14 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
