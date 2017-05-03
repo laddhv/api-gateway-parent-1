@@ -34,7 +34,7 @@ pipeline {
                 }
             }
             steps {
-                sh "mvn clean install"
+                sh "mvn clean deploy"
             }
         }
         stage('SonarQube Analysis') {
