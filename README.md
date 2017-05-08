@@ -1,4 +1,5 @@
 [![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)](https://opensource.org/licenses/EPL-1.0)
+[![Build Status](https://travis-ci.org/dellemc-symphony/api-gateway-parent.svg?branch=master)](https://travis-ci.org/dellemc-symphony/api-gateway-parent)
 # api-gateway-parent
 ## Description
 This repository provides an API gateway to project Symphony. This service is automatically started on the Symphony OVA. 
