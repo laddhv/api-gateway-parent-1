@@ -1,42 +1,47 @@
 [![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)](https://opensource.org/licenses/EPL-1.0)
 [![Build Status](https://travis-ci.org/dellemc-symphony/api-gateway-parent.svg?branch=master)](https://travis-ci.org/dellemc-symphony/api-gateway-parent)
+
 # api-gateway-parent
 ## Description
-This repository provides an API gateway to project Symphony. This service is automatically started on the Symphony OVA. 
+This repository provides an API gateway.
+
 ## Documentation
-## API overview
-http://[symphony-ova]:10000
+The documentation is accessed through [dellemc-symphony.readthedocs.io][documentation]
 
 ## Before you begin
-Refer to the symphony-ova repo to install the Symphony OVA.
-The system should have Java Runtime Environment installed. The system should have RabbitMQ installed.
+Make sure the following is installed:
+```
+Apache Maven 3.0.5+
+Docker 1.12+
+Docker Compose 1.8.0+
+Java Development Kit(version 8)
+RabbitMQ  3.6.6
+```
 ## Building
-For compilation, Java and Maven should be installed.
-
-Then run the following command:- mvn clean compile
-## Packaging
-For packaging Java and Maven should be installed.
-
-Then run the following command:- mvn clean install
+Run the following command to build this project:
+```bash
+mvn clean install
+```
 
 ## Deploying
-The output of the build for this repository is a docker container. See /parent-boot-docker-app sub-folder.
-## Testing
-Unit tests are run as part of the mvn packaging 
+The output of running the build step is a tagged Docker image.
+You can run this locally with the following command:
+```bash
+docker run -it --net="host" <docker_image_hash>
+```
+This deploys a container based on the image created in the build step that communicates with the host's RabbitMQ installation.
+
 ## Contributing
-
-The Symphony project is a collection of services and libraries housed at https://github.com/dellemc-symphony.
-Contribute code and make submissions at the relevant GitHub repository level. See our documentation for details on how to contribute.
-
-## Community and Support
-
-
-Reach out to us on Slack #symphony channel. Request an invite at http://community.codedellemc.com.
-You can also join [Google Groups] (https://groups.google.com/d/forum/dellemc-symphony) and start a discussion. 
-
-## Licensing
-See [LICENSE.md][licence] provided in project root.
-
-[licence]:https://github.com/dellemc-symphony/api-gateway-parent/blob/master/LICENSE.md
-
-
+Project Symphony is a collection of services and libraries housed at [GitHub][github].
+Contribute code and make submissions at the relevant GitHub repository level.
+See our documentation for details on how to [contribute][contributing].
+## Community
+Reach out to us on Slack [#symphony][slack] channel. Request an invite at [{code}Community][codecommunity]
+You can also join [Google Groups][googlegroups] and start a discussion.
+ 
+[slack]: https://codecommunity.slack.com/messages/symphony
+[googlegroups]: https://groups.google.com/forum/#!forum/dellemc-symphony
+[codecommunity]: http://community.codedellemc.com/
+[contributing]: http://dellemc-symphony.readthedocs.io/en/latest/contributingtosymphony.html
+[github]: https://github.com/dellemc-symphony
+[documentation]: https://dellemc-symphony.readthedocs.io/en/latest/
