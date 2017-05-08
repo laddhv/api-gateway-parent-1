@@ -6,7 +6,7 @@
 This repository provides an API gateway.
 
 ## Documentation
-The documentation is accessed through [dellemc-symphony.readthedocs.io][documentation]
+You can find additional documentation for Project Symphony at [dellemc-symphony.readthedocs.io](https://dellemc-symphony.readthedocs.io).
 
 ## Before you begin
 Make sure the following is installed:
