@@ -24,11 +24,13 @@ mvn clean install
 
 ## Deploying
 The output of running the build step is a tagged Docker image.
-You can run this locally with the following command:
+ 
+Run this locally:
 ```bash
 docker run -it --net="host" <docker_image_hash>
 ```
-This deploys a container based on the image created in the build step that communicates with the host's RabbitMQ installation.
+This deploys a container that communicates with the host's RabbitMQ installation. The container is based on the image created in the build step.
+
 
 ## Contributing
 Project Symphony is a collection of services and libraries housed at [GitHub][github].
