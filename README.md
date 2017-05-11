@@ -19,6 +19,7 @@ Verify that the following tools are installed:
 * Docker Compose 1.8.0+
 * Java Development Kit (version 8)
 * RabbitMQ 3.6.6
+
 ## Building
 Run the following command to build this project:
 ```bash
