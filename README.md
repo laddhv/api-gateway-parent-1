@@ -9,13 +9,16 @@ This repository provides an API gateway.
 You can find additional documentation for Project Symphony at [dellemc-symphony.readthedocs.io](https://dellemc-symphony.readthedocs.io).
 
 ## Before you begin
+For Linux development, install the rpm-build package to enable RPM creation.
+For Windows development, install cygwin or an equivalent and ensure the rpm-build package is installed.
+ 
 Verify that the following tools are installed:
  
 * Apache Maven 3.0.5+
 * Docker 1.12+
 * Docker Compose 1.8.0+
 * Java Development Kit (version 8)
-* RabbitMQ  3.6.6
+* RabbitMQ 3.6.6
 ## Building
 Run the following command to build this project:
 ```bash
@@ -23,6 +26,16 @@ mvn clean install
 ```
 
 ## Deploying
+If installing the RPM for the first time, run this locally:
+```bash
+rpm -ivh <RPM Name>
+```
+ 
+If upgrading an existing RPM, run this locally:
+```bash
+rpm -Uvh <RPM Name>
+```
+
 The output of running the build step is a tagged Docker image.
  
 Run this locally:
