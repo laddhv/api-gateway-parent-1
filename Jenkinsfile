@@ -27,12 +27,7 @@ pipeline {
                 sh "mvn test"
             }
         }
-        stage('Install') {
-            when {
-                expression {
-                    return env.BRANCH_NAME !=~ /master|develop|release\/.*/
-                }
-            }
+        stage('Artifact') {
             steps {
                sh "mvn install"
                archiveArtifacts '**/*.rpm'
