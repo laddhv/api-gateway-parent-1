@@ -31,13 +31,13 @@ pipeline {
             when {
                 expression {
                     return env.BRANCH_NAME !=~ /master|develop|release\/.*/
-                    }
-                }
-                steps {
-                  sh "mvn install"
-                  archiveArtifacts '**/*.rpm'
                 }
             }
+            steps {
+               sh "mvn install"
+               archiveArtifacts '**/*.rpm'
+            }
+        }
         stage('Deploy') {
             when {
                 expression {
