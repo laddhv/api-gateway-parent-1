@@ -120,6 +120,7 @@ pipeline {
             step([$class: 'WsCleanup'])   
         }
         success {
+            archiveArtifacts '**/*.rpm'
             emailext attachLog: true, 
                 body: 'Pipeline job ${JOB_NAME} success. Build URL: ${BUILD_URL}', 
                 recipientProviders: [[$class: 'CulpritsRecipientProvider']], 
