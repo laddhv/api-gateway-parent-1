@@ -19,7 +19,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                sh "mvn compile"
+                sh "mvn install -DskipTests=true -DskipITs"
             }
         }
         stage('Unit Testing') {
@@ -30,11 +30,12 @@ pipeline {
         stage('Deploy') {
             when {
                 expression {
-                    return env.BRANCH_NAME ==~ /master|develop|release\/.*/
+                    return env.BRANCH_NAME ==~ /develop|release\/.*/
                 }
             }
             steps {
-                sh "mvn deploy"
+                sh "mvn deploy -P buildDockerImageOnJenkins -DdockerImage.tag=api-gateway-parent-develop.${env.BUILD_NUMBER} -Ddocker.registry=docker-dev-local.art.local -DdeleteDockerImages=true -DskipTests=true -DskipITs"
+		archiveArtifacts artifacts: '**/*.rpm', fingerprint: true
             }
         }
         stage('SonarQube Analysis') {
