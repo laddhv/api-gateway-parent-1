@@ -34,7 +34,7 @@ pipeline {
                 }
             }
             steps {
-                sh "mvn deploy -P buildDockerImageOnJenkins -DdockerImage.tag=api-gateway-parent-develop.${env.BUILD_NUMBER} -Ddocker.registry=docker-dev-local.art.local -DdeleteDockerImages=true -DskipTests=true -DskipITs"
+                sh "mvn deploy -DskipDocker=false -DdockerImage.tag=api-gateway-parent-develop.${env.BUILD_NUMBER} -Ddocker.registry=docker-dev-local.art.local -DdeleteDockerImages=true -DskipTests=true -DskipITs"
 		archiveArtifacts artifacts: '**/*.rpm', fingerprint: true
             }
         }
