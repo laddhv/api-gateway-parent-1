@@ -41,7 +41,6 @@ pipeline {
             }
             steps {
                 sh "mvn deploy"
-                archiveArtifacts '**/*.rpm'
             }
         }
         stage('SonarQube Analysis') {
