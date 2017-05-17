@@ -33,57 +33,58 @@ init_dir ()
 ##############################################################################
 # check and create the common directories
 ##############################################################################
+init_dir ${RPM_BUILD_ROOT}/usr/lib/systemd/system
+
+
+##############################################################################
+# check and create the root directory
+##############################################################################
+init_dir ${RPM_BUILD_ROOT}/opt/dell
+init_dir ${RPM_BUILD_ROOT}/opt/dell/cpsd
+init_dir ${RPM_BUILD_ROOT}/opt/dell/cpsd/api-gateway
+
 
 ##############################################################################
 # check and create the directories for the service
 ##############################################################################
-SERVICE_BUILD_ROOT=${RPM_BUILD_ROOT}/opt/dell/api-gateway
+
+SERVICE_BUILD_ROOT=${RPM_BUILD_ROOT}/opt/dell/cpsd/api-gateway
 
 init_dir ${SERVICE_BUILD_ROOT}
 init_dir ${SERVICE_BUILD_ROOT}/install
-init_dir ${RPM_BUILD_ROOT}/usr/lib/systemd/system
-
-##############################################################################
-# copy the service script and logrotate to the respective directory
-##############################################################################
+init_dir ${SERVICE_BUILD_ROOT}/image
+init_dir ${SERVICE_BUILD_ROOT}/image/api-gateway
 
 
 ##############################################################################
-# copy the scripts to the required directories
+# copy the image to the required directory
 ##############################################################################
+cp -r ${RPM_SOURCE_DIR}/target/dependency/api-gateway/* ${SERVICE_BUILD_ROOT}/image/api-gateway
 
 
 ##############################################################################
-# copy the configuration to the conf directory
+# copy the scripts to the install directory
 ##############################################################################
+cp -rf ${RPM_SOURCE_DIR}/build/install.sh ${SERVICE_BUILD_ROOT}/install
+cp -rf ${RPM_SOURCE_DIR}/build/remove.sh ${SERVICE_BUILD_ROOT}/install
+cp -rf ${RPM_SOURCE_DIR}/build/upgrade.sh ${SERVICE_BUILD_ROOT}/install
 
 
 ##############################################################################
-# copy the logs configuration to the conf directory
+# copy the unit file
 ##############################################################################
+cp ${RPM_SOURCE_DIR}/build/dell-api-gateway.service ${RPM_BUILD_ROOT}/usr/lib/systemd/system
 
-
-##############################################################################
-# copy the install scripts
-##############################################################################
-cp -rf ${RPM_SOURCE_DIR}/build/install/* ${SERVICE_BUILD_ROOT}/install
-cp -rf ${RPM_SOURCE_DIR}/usr/lib/systemd/system/* ${RPM_BUILD_ROOT}/usr/lib/systemd/system
-cp -rf ${RPM_SOURCE_DIR}/opt/dell/api-gateway/install/docker-compose.yml ${SERVICE_BUILD_ROOT}/install
-
-##############################################################################
-# copy the libs to the required directories
-##############################################################################
-
+cp -rf ${RPM_SOURCE_DIR}/target/dependency/api-gateway/docker-compose.yml ${SERVICE_BUILD_ROOT}/install/.
 
 ##############################################################################
 # pre
 ##############################################################################
 %pre
-
 getent group dell >/dev/null || /usr/sbin/groupadd -f -r dell
 getent passwd apigw >/dev/null || /usr/sbin/useradd -r -g dell -s /sbin/nologin -M apigw
-
 exit 0
+
 
 ##############################################################################
 # post
@@ -91,10 +92,10 @@ exit 0
 %post
 if [ $1 -eq 1 ];then
     echo "Installing Dell Inc. API Gateway components"
-    /bin/sh /opt/dell/api-gateway/install/api-gateway_install.sh
+    /bin/sh /opt/dell/cpsd/api-gateway/install/install.sh
 #elif [ $1 -eq 2 ];then
 #    echo "Updating Dell Inc. API Gateway components"
-#    /bin/sh /opt/dell/api-gateway/install/api-gateway_upgrade.sh
+#    /bin/sh /opt/dell/cpsd/api-gateway/install/upgrade.sh
 else
     echo "Unexpected argument passed to API Gateway %post script: [$1]"
     exit 1
@@ -108,7 +109,7 @@ exit 0
 %preun
 #if [ $1 -eq 0 ];then
 #    echo "Removing Dell Inc. API Gateway components"
-#    /bin/sh /opt/dell/api-gateway/install/api-gateway_remove.sh
+#    /bin/sh /opt/dell/cpsd/api-gateway/install/remove.sh
 #fi
 #exit 0
 
@@ -117,8 +118,9 @@ exit 0
 ##############################################################################
 %files
 
-%attr(0754,apigw,dell) /opt/dell/api-gateway/
-%attr(0754,apigw,dell) /opt/dell/api-gateway/install/
+%attr(644,root,root) /usr/lib/systemd/system/dell-api-gateway.service
 
-%config(noreplace) /usr/lib/systemd/system/api-gateway-services.service
-%config(noreplace) /opt/dell/api-gateway/install/docker-compose.yml
+%attr(0754,apigw,dell) /opt/dell/cpsd/api-gateway/
+%attr(0754,apigw,dell) /opt/dell/cpsd/api-gateway/install
+%attr(0754,apigw,dell) /opt/dell/cpsd/api-gateway/image
+%attr(0754,apigw,dell) /opt/dell/cpsd/api-gateway/image/api-gateway

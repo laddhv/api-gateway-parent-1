@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright &copy; 2017 Dell Inc. or its subsidiaries.  All Rights Reserved.
+    Dell EMC Confidential/Proprietary Information
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.dell.cpsd.api-gateway</groupId>
+        <artifactId>api-gateway-parent</artifactId>
+        <version>1.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.dell.cpsd.api-gateway</groupId>
+    <artifactId>api-gateway-distribution</artifactId>
+    <packaging>pom</packaging>
+
+    <licenses>
+        <license>
+            <name>Eclipse Public License - v 1.0</name>
+            <url>http://www.eclipse.org/legal/epl-v10.html</url>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>Frank Rouse</name>
+            <email>frank.rouse@dell.com</email>
+            <organization>com.dell.cpsd</organization>
+            <organizationUrl>https://github.com/rousef42</organizationUrl>
+        </developer>
+    </developers>
+    
+    <scm>
+        <connection>scm:git:git://github.com/dellemc-symphony/api-gateway-parent.git</connection>
+        <developerConnection>scm:git:git://github.com/dellemc-symphony/api-gateway-parent.git</developerConnection>
+        <url>https://github.com/dellemc-symphony/api-gateway-parent/tree/master</url>
+    </scm>
+    
+    <properties>
+        <spring-boot.version>1.4.2.RELEASE</spring-boot.version>
+        
+        <dockerDirectory>${project.basedir}</dockerDirectory>
+        <dockerImage.org>cpsd</dockerImage.org>
+        <dockerImage.tag>latest</dockerImage.tag>
+        <dockerImage.service>api-gateway</dockerImage.service>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.dell.cpsd.api-gateway</groupId>
+            <artifactId>api-gateway</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    
+    <profiles>
+        <profile>
+            <id>locallyBuildDockerImage</id>
+            <properties>
+                <skipDocker>false</skipDocker>
+                <dockerImage.tag>latest</dockerImage.tag>
+            </properties>
+        </profile>
+    </profiles>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.10</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies-for-distribution</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/dependency/lib</outputDirectory>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<artifactItems>
+								<artifactItem>
+									<excludes>*-sources.jar</excludes>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<configuration>
+					<buildArgs>
+						<DELL_JAVA_VERSION>1.8</DELL_JAVA_VERSION>
+						<BUILD_NUMBER>N/A</BUILD_NUMBER>
+						<GIT_COMMIT>a</GIT_COMMIT>
+						<BUILD_TYPE>dev</BUILD_TYPE>
+						<CPSD_SOFTWARE_VERSION>${project.version}</CPSD_SOFTWARE_VERSION>
+					</buildArgs>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>exec-maven-plugin</artifactId>
+				<groupId>org.codehaus.mojo</groupId>
+				<executions>
+					<execution>
+						<id>Service Packaging</id>
+						<phase>package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<environmentVariables>
+								<IMAGE_NAME>${dockerImage.org}-${dockerImage.service}</IMAGE_NAME>
+								<IMAGE_TAG>${dockerImage.tag}</IMAGE_TAG>
+							</environmentVariables>
+							<executable>/bin/sh</executable>
+							<arguments>
+								<argument>resources/packaging/docker_image_packaging.sh</argument>
+							</arguments>
+							<workingDirectory>${project.basedir}</workingDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2-beta-5</version>
+				<configuration>
+					<descriptors>
+						<descriptor>assembly/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

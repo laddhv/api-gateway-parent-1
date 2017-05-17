@@ -1,0 +1,18 @@
+#
+# Copyright (c) 2017 Dell Inc. or its subsidiaries.  All Rights Reserved.
+# Dell EMC Confidential/Proprietary Information
+#
+[Unit]
+Description=Dell Inc. API Gateway Service
+
+After=network.target docker.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/dell
+Environment=HOSTNAME=%H
+ExecStart=/usr/bin/docker-compose -f /opt/dell/cpsd/api-gateway/install/docker-compose.yml up
+ExecStop=/usr/bin/docker-compose -f /opt/dell/cpsd/api-gateway/install/docker-compose.yml down
+
+[Install]
+WantedBy=multi-user.target

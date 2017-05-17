@@ -7,17 +7,13 @@
 
     <parent>
         <groupId>com.dell.cpsd.api-gateway</groupId>
-        <artifactId>parent-boot-docker-app</artifactId>
+        <artifactId>api-gateway-parent</artifactId>
         <version>1.1-SNAPSHOT</version>
-        <relativePath>../parent-boot-docker-app</relativePath>
     </parent>
+    
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>api-gateway</artifactId>
-
-    <properties>
-        <dockerImage.service>${project.artifactId}</dockerImage.service>
-    </properties>
 
     <licenses>
         <license>
@@ -41,7 +37,7 @@
         <url>https://github.com/dellemc-symphony/api-gateway-parent/tree/master</url>
     </scm>
 
-    <dependencies>
+    <dependencies>  
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zuul</artifactId>
@@ -61,11 +57,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-            </plugin>
+                
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>

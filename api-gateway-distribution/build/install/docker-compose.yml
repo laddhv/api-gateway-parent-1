@@ -1,0 +1,16 @@
+#
+#Copyright &copy; 2017 Dell Inc. or its subsidiaries.  All Rights Reserved.
+#Dell EMC Confidential/Proprietary Information
+#
+version: '2'
+
+services:
+
+  gateway:
+    image: IMAGE_NAME_STANDIN:IMAGE_TAG_STANDIN
+    container_name: symphony-api-gateway
+    network_mode: "host"
+    ports:
+      - "10000:10000"
+    command: --spring.cloud.consul.host=${HOSTNAME}
+    
