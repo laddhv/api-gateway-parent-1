@@ -30,4 +30,6 @@ LABEL   com.dell.cpsd.version=$CPSD_SOFTWARE_VERSION\
 RUN mkdir ./logs \
 && chmod 755 ./bin/run.sh
 
+EXPOSE 10000
+
 ENTRYPOINT ["./bin/run.sh"]

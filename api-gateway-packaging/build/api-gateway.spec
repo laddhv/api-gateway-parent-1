@@ -2,7 +2,7 @@
 # Copyright &copy; 2017 Dell Inc. or its subsidiaries. All Rights Reserved.
 # Dell EMC Confidential/Proprietary Information
 #
-Summary: Dell Inc. API Gateway Installer
+Summary: Dell Inc. API Gateway Service
 Name: cpsd-api-gateway-service
 Version: %_version
 Release: %_revision
@@ -10,12 +10,13 @@ License: Commercial
 Vendor: Dell Inc.
 Group: System Environment/Dell Inc. Applications
 URL: http://www.dell.com
+Requires: jre >= 1.8.0
 
 %define _use_internal_dependency_generator 0
 %define __find_requires %{nil}
 
 %description
-Dell Inc. API Gateway installer
+Dell Inc. API Gateway Service
 
 
 ##############################################################################
