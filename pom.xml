@@ -55,7 +55,6 @@
         <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
         <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
 
-        <guava.version>18.0</guava.version>
     </properties>
 
     <dependencyManagement>
