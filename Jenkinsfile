@@ -38,7 +38,7 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                sh "mvn clean ${MAVEN_PHASE} -DskipDocker=false -PbuildDockerImageOnJenkins -Ddocker.registry=${params.dockerRegistry} -DdockerImage.tag=${params.dockerImageTag} -DdeleteDockerImages=${params.dockerImagesDel}"
+                sh "mvn clean ${MAVEN_PHASE} -DskipDocker=false -Ddocker.registry=${params.dockerRegistry} -DdockerImage.tag=${params.dockerImageTag} -DdeleteDockerImages=${params.dockerImagesDel} -s ~/.m2/settings.xml-0.2.6"
             }
         }
         stage('Archive Artifacts') {
