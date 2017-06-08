@@ -4,7 +4,7 @@ UPSTREAM_JOBS_LIST = [
 UPSTREAM_JOBS = UPSTREAM_JOBS_LIST.join(',')
 
 MAVEN_PHASE = "install"
-if (env.BRANCH_NAME ==~ /master|develop|release\/.*/) {
+if (env.BRANCH_NAME ==~ /master|develop|devops.*|release\/.*/) {
     MAVEN_PHASE = "deploy"
 }
 
@@ -38,14 +38,9 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                sh "mvn clean ${MAVEN_PHASE} -Dmaven.repo.local=.repo -DskipDocker=false -PbuildDockerImageOnJenkins -Ddocker.registry=${params.dockerRegistry} -DdockerImage.tag=${params.dockerImageTag} -DdeleteDockerImages=${params.dockerImagesDel}"
+                sh "mvn clean ${MAVEN_PHASE} -DskipDocker=false -PbuildDockerImageOnJenkins -Ddocker.registry=${params.dockerRegistry} -DdockerImage.tag=${params.dockerImageTag} -DdeleteDockerImages=${params.dockerImagesDel}"
             }
         }
-        //stage('Record Test Results') {
-        //    steps {
-        //        junit '**/target/*-reports/*.xml'
-        //    }
-        //}
         stage('Archive Artifacts') {
             steps {
                 archiveArtifacts artifacts: '**/*.rpm', fingerprint: true 
