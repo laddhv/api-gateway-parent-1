@@ -1,6 +1,6 @@
 [![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)](https://opensource.org/licenses/EPL-1.0)
 [![Build Status](https://travis-ci.org/dellemc-symphony/api-gateway-parent.svg?branch=master)](https://travis-ci.org/dellemc-symphony/api-gateway-parent)
-
+[![codecov](https://codecov.io/gh/dellemc-symphony/api-gateway-parent/branch/master/graph/badge.svg)](https://codecov.io/gh/dellemc-symphony/api-gateway-parent)
 # api-gateway-parent
 ## Description
 This repository provides an API gateway.
